@@ -1,3 +1,22 @@
+<!--
+  ~ EveMinerals
+  ~ Copyright (C) 2014  Rastislav Komara
+  ~
+  ~ This program is free software; you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation; either version 2 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License along
+  ~ with this program; if not, write to the Free Software Foundation, Inc.,
+  ~ 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+  -->
+
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
@@ -32,6 +51,24 @@
     <build>
         <plugins>
             <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>properties-maven-plugin</artifactId>
+                <version>1.0-alpha-2</version>
+                <executions>
+                    <execution>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>read-project-properties</goal>
+                        </goals>
+                        <configuration>
+                            <files>
+                                <file>${basedir}/../.idea/keystore.properties</file>
+                            </files>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
                 <version>2.2</version>
@@ -42,16 +79,81 @@
                             <goal>shade</goal>
                         </goals>
                         <configuration>
+                            <artifactSet>
+                                <includes>
+                                    <include>komara.eo:*</include>
+                                </includes>
+                            </artifactSet>
                             <transformers>
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
                                     <mainClass>komara.eo.gui.EveOnlineTools</mainClass>
+                                </transformer>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.PluginXmlResourceTransformer"/>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ApacheNoticeResourceTransformer">
+                                    <addHeader>false</addHeader>
                                 </transformer>
                             </transformers>
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
-
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jarsigner-plugin</artifactId>
+                <version>1.3.1</version>
+                <executions>
+                    <execution>
+                        <id>sign</id>
+                        <goals>
+                            <goal>sign</goal>
+                            <goal>verify</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <keystore>${sign.keystore.location}</keystore>
+                    <alias>${sign.keyAlias}</alias>
+                    <storepass>${sign.keystore.storepass}</storepass>
+                    <keypass>${sign.keystore.keypass}</keypass>
+                </configuration>
+            </plugin>
+            <!--<plugin>-->
+                <!--<groupId>org.codehaus.mojo</groupId>-->
+                <!--<artifactId>webstart-maven-plugin</artifactId>-->
+                <!--<version>1.0-beta-3</version>-->
+                <!--<executions>-->
+                    <!--<execution>-->
+                        <!--<phase>install</phase>-->
+                        <!--<goals>-->
+                            <!--<goal>jnlp</goal>-->
+                        <!--</goals>-->
+                    <!--</execution>-->
+                <!--</executions>-->
+                <!--<configuration>-->
+                    <!--<excludeTransitive>true</excludeTransitive>-->
+                    <!--<dependencies>-->
+                        <!--&lt;!&ndash; Note that only groupId and artifactId must be specified here. because of a limitation of the Include/ExcludesArtifactFilter &ndash;&gt;-->
+                        <!--<excludes>-->
+                          <!--<exclude>org.codehaus.mojo:properties-maven-plugin</exclude>-->
+                        <!--</excludes>-->
+                    <!--</dependencies>-->
+                    <!--<codebase>${jnlp.codebase}</codebase>-->
+                    <!--<jnlp>-->
+                        <!--<outputFile>${project.artifactId}.jnlp</outputFile>-->
+                        <!--<mainClass>komara.eo.gui.EveOnlineTools</mainClass>-->
+                    <!--</jnlp>-->
+                    <!--<pack200>true</pack200>-->
+                    <!--<sign>-->
+                        <!--<keystore>${sign.keystore.location}</keystore>-->
+                        <!--<keypass>${sign.keystore.keypass}</keypass>-->
+                        <!--<storepass>${sign.keystore.storepass}</storepass>-->
+                        <!--<alias>${sign.keyAlias}</alias>-->
+                        <!--<verify>false</verify>-->
+                    <!--</sign>-->
+                    <!--<verbose>true</verbose>-->
+                <!--</configuration>-->
+            <!--</plugin>-->
         </plugins>
     </build>
 

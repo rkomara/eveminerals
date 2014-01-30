@@ -1,3 +1,22 @@
+/*
+ * EveMinerals
+ * Copyright (C) 2014  Rastislav Komara
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ */
+
 package komara.eo.gui.mineral;
 
 import komara.eo.ReprocessingService;
@@ -15,7 +34,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.text.NumberFormat;
 import java.util.EnumSet;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.ServiceLoader;
 import java.util.concurrent.ExecutionException;
 import java.util.prefs.Preferences;
 
@@ -71,17 +92,23 @@ class ReprocessingPlantPanel extends JPanel {
                         });
                         EnumSet<Sovereignty> sovereignty = sovereigntyPanel.getSovereignty();
                         double securityStatus = sovereigntyPanel.getMinimumSecurityStatus();
+                        ServiceLoader<ReprocessingService> serviceLoader = ServiceLoader.load(ReprocessingService.class);
 
-                        ReprocessingService service = ReprocessingService.Lookup.find();
-                        ReprocessingPlant plant = service.getPlant(sovereignty, securityStatus);
+                        Iterator<ReprocessingService> iterator = serviceLoader.iterator();
+                        if (iterator.hasNext()) {
+                            ReprocessingService service = iterator.next();
+                            ReprocessingPlant plant = service.getPlant(sovereignty, securityStatus);
 
-                        double yield = plantSettings.getYield();
-                        double tax = plantSettings.getTax();
+                            double yield = plantSettings.getYield();
+                            double tax = plantSettings.getTax();
 
-                        plant.setUserStatistics(yield / 100, tax / 100);
+                            plant.setUserStatistics(yield / 100, tax / 100);
 
-                        ReprocessingSolution solution = plant.getMinimumOreVolume(mineralPanel.getMinerals());
-                        return toFormattedString(solution, plantSettings.getCargo());
+                            ReprocessingSolution solution = plant.getMinimumOreVolume(mineralPanel.getMinerals());
+                            return toFormattedString(solution, plantSettings.getCargo());
+                        } else {
+                            return "No suitable reprocessing service found.";
+                        }
                     }
 
                     @Override
@@ -132,10 +159,10 @@ class ReprocessingPlantPanel extends JPanel {
         }
         NumberFormat format = NumberFormat.getInstance();
         StringBuilder builder = new StringBuilder("Minimal ore volume solution:\n");
-        Map<Ore,Long> oreList = solution.getOreList();
+        Map<Ore, Long> oreList = solution.getOreList();
         for (Map.Entry<Ore, Long> entry : oreList.entrySet()) {
             builder.append("\t").append(entry.getKey().getName()).append(": ").append(format.format(entry.getValue()));
-            builder.append(" (").append(Math.ceil(((double) entry.getValue())/cargoVolume)).append(" shipments)").append("\n");
+            builder.append(" (").append(Math.ceil(((double) entry.getValue()) / cargoVolume)).append(" shipments)").append("\n");
         }
 
         builder.append("\n").append("You will get following excessive minerals:\n");

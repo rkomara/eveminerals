@@ -17,25 +17,27 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-package komara.eo.gui.mineral;
+package komara.eo;
 
-import javax.swing.text.AttributeSet;
-import javax.swing.text.BadLocationException;
-import javax.swing.text.PlainDocument;
+import komara.eo.mineral.ReprocessingPlant;
+
+import java.util.EnumSet;
 
 /**
- * Created by Rastislav Komara on 1/15/14.
+ * Created by Rastislav Komara on 1/29/14.
  */
-class MineralVolumeDocument extends PlainDocument {
+public class ReprocessingServiceImpl implements ReprocessingService {
+
+    public ReprocessingServiceImpl() {
+    }
 
     @Override
-    public void insertString(int offs, String str, AttributeSet a) throws BadLocationException {
-        char[] chars = str.toCharArray();
-        for (char aChar : chars) {
-            if (!Character.isDigit(aChar)) {
-                return;
-            }
-        }
-        super.insertString(offs, str, a);
+    public ReprocessingPlant getPlant(EnumSet<Sovereignty> sovereignty, double securityStatus) {
+        return ReprocessingService.Lookup.find().getPlant(sovereignty, securityStatus);
+    }
+
+    @Override
+    public ReprocessingPlant getIdealPlant() {
+        return ReprocessingService.Lookup.find().getIdealPlant();
     }
 }

@@ -42,4 +42,30 @@ public enum Mineral {
         }
         return result;
     }
+
+    public static Mineral find(int remoteId) {
+        /*
+            34          Tritanium
+            35          Pyerite
+            36          Mexallon
+            37          Isogen
+            38          Nocxium
+            39          Zydrine
+            40          Megacyte
+            11399       Morphite
+         */
+        switch (remoteId) {
+            case 34: return Tritanium;
+            case 35: return Pyerite;
+            case 36: return Mexallon;
+            case 37: return Isogen;
+            case 38: return Nocxium;
+            case 39: return Zydrine;
+            case 40: return Megacyte;
+            case 11399: return Morphite;
+            default: {
+                throw new RuntimeException("Id does not represent mineral");
+            }
+        }
+    }
 }

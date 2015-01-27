@@ -34,52 +34,55 @@ class OreList {
     private final List<Ore> ores = new LinkedList<Ore>();
 
     private OreList() {
-        ores.add(new OreImpl("Veldspar", 333, .1, Sovereignty.empires(), -1.0, 1.0,
-                new OreMineralData(Mineral.Tritanium, 30.03, 1000)));
-        ores.add(new OreImpl("Scordite", 333, 0.15,Sovereignty.empires(), -1.0, 1.0,
-                new OreMineralData(Mineral.Tritanium, 16.67, 833),
-                new OreMineralData(Mineral.Pyerite, 8.32, 416)));
-        ores.add(new OreImpl("Pyroxeres", 333, .3, EnumSet.of(Sovereignty.Caldari, Sovereignty.Amarr), -1.0, .8,
-                new OreMineralData(Mineral.Tritanium, 8.44, 844),
-                new OreMineralData(Mineral.Pyerite, 0.59, 59),
-                new OreMineralData(Mineral.Mexallon, 1.2, 120),
-                new OreMineralData(Mineral.Nocxium, .11, 11)));
-        ores.add(new OreImpl("Plagioclase", 333, .35, EnumSet.of(Sovereignty.Gallente, Sovereignty.Minmatar), -1.0, 0.8,
-                new OreMineralData(Mineral.Tritanium, 2.19, 256),
-                new OreMineralData(Mineral.Pyerite, 4.39, 512),
-                new OreMineralData(Mineral.Mexallon, 2.19, 256)));
-        ores.add(new OreImpl("Plagioclase", 333, .35, EnumSet.of(Sovereignty.Caldari), -1.0, 0.7,
-                new OreMineralData(Mineral.Tritanium, 2.19, 256),
-                new OreMineralData(Mineral.Pyerite, 4.39, 512),
-                new OreMineralData(Mineral.Mexallon, 2.19, 256)));
-        ores.add(new OreImpl("Kernite", 400, 1.2,  EnumSet.of(Sovereignty.Amarr), -1.0, 0.7,
-                new OreMineralData(Mineral.Tritanium, 0.8, 386),
-                new OreMineralData(Mineral.Mexallon, 1.61, 773),
-                new OreMineralData(Mineral.Isogen, 0.8, 386)));
-        ores.add(new OreImpl("Kernite", 400, 1.2,  EnumSet.of(Sovereignty.Caldari, Sovereignty.Minmatar), -1.0, 0.6,
-                new OreMineralData(Mineral.Tritanium, 0.8, 386),
-                new OreMineralData(Mineral.Mexallon, 1.61, 773),
-                new OreMineralData(Mineral.Isogen, 0.8, 386)));
-        ores.add(new OreImpl("Omber", 500, .6, EnumSet.of(Sovereignty.Gallente, Sovereignty.Minmatar), -1.0, 0.6,
-                new OreMineralData(Mineral.Tritanium, 1.02, 307),
-                new OreMineralData(Mineral.Pyerite, .41, 123),
-                new OreMineralData(Mineral.Isogen, 1.02, 307)));
-        ores.add(new OreImpl("Jaspet", 500, 2.0, EnumSet.of(Sovereignty.Amarr, Sovereignty.Gallente), -1.0, 0.4,
-                new OreMineralData(Mineral.Tritanium, 0.259, 259),
-                new OreMineralData(Mineral.Pyerite, 0.259, 259),
-                new OreMineralData(Mineral.Mexallon, 0.518, 518),
-                new OreMineralData(Mineral.Nocxium, .259, 259),
-                new OreMineralData(Mineral.Zydrine, .008, 8)));
-        ores.add(new OreImpl("Hemorphite", 500, 3.0, EnumSet.of(Sovereignty.Amarr, Sovereignty.Gallente), -1.0, 0.2,
-                new OreMineralData(Mineral.Tritanium, .141, 212),
-                new OreMineralData(Mineral.Isogen, .141, 212),
-                new OreMineralData(Mineral.Nocxium, .282, 424),
-                new OreMineralData(Mineral.Zydrine, .018, 28)));
+        ores.add(new OreImpl("Veldspar", 100, .1, Sovereignty.empires(), -1.0, 1.0,
+                new OreMineralData(Mineral.Tritanium, 30.03, 415)));
+        ores.add(new OreImpl("Scordite", 100, 0.15,Sovereignty.empires(), -1.0, 1.0,
+                new OreMineralData(Mineral.Tritanium, 16.67, 346),
+                new OreMineralData(Mineral.Pyerite, 8.32, 173)));
+        ores.add(new OreImpl("Pyroxeres", 100, .3, EnumSet.of(Sovereignty.Caldari, Sovereignty.Amarr), -1.0, .8,
+                new OreMineralData(Mineral.Tritanium, 8.44, 351),
+                new OreMineralData(Mineral.Pyerite, 0.59, 25),
+                new OreMineralData(Mineral.Mexallon, 1.2, 50),
+                new OreMineralData(Mineral.Nocxium, .11, 5)));
+        ores.add(new OreImpl("Plagioclase", 100, .35, EnumSet.of(Sovereignty.Gallente, Sovereignty.Minmatar), -1.0, 0.8,
+                new OreMineralData(Mineral.Tritanium, 2.19, 107),
+                new OreMineralData(Mineral.Pyerite, 4.39, 213),
+                new OreMineralData(Mineral.Mexallon, 2.19, 107)));
+        ores.add(new OreImpl("Plagioclase", 100, .35, EnumSet.of(Sovereignty.Caldari), -1.0, 0.7,
+                new OreMineralData(Mineral.Tritanium, 2.19, 107),
+                new OreMineralData(Mineral.Pyerite, 4.39, 213),
+                new OreMineralData(Mineral.Mexallon, 2.19, 107)));
+        ores.add(new OreImpl("Kernite", 100, 1.2,  EnumSet.of(Sovereignty.Amarr), -1.0, 0.7,
+                new OreMineralData(Mineral.Tritanium, 0.8, 134),
+                new OreMineralData(Mineral.Mexallon, 1.61, 267),
+                new OreMineralData(Mineral.Isogen, 0.8, 134)));
+        ores.add(new OreImpl("Kernite", 100, 1.2,  EnumSet.of(Sovereignty.Caldari, Sovereignty.Minmatar), -1.0, 0.6,
+                new OreMineralData(Mineral.Tritanium, 0.8, 134),
+                new OreMineralData(Mineral.Mexallon, 1.61, 267),
+                new OreMineralData(Mineral.Isogen, 0.8, 134)));
+        ores.add(new OreImpl("Omber", 100, .6, EnumSet.of(Sovereignty.Gallente, Sovereignty.Minmatar), -1.0, 0.6,
+                new OreMineralData(Mineral.Tritanium, 1.02, 85),
+                new OreMineralData(Mineral.Pyerite, .41, 34),
+                new OreMineralData(Mineral.Isogen, 1.02, 85)));
+        ores.add(new OreImpl("Jaspet", 100, 2.0, EnumSet.of(Sovereignty.Amarr, Sovereignty.Gallente), -1.0, 0.4,
+                new OreMineralData(Mineral.Tritanium, 0.259, 72),
+                new OreMineralData(Mineral.Pyerite, 0.259, 121),
+                new OreMineralData(Mineral.Mexallon, 0.518, 144),
+                new OreMineralData(Mineral.Nocxium, .259, 72),
+                new OreMineralData(Mineral.Zydrine, .008, 3)));
+        ores.add(new OreImpl("Hemorphite", 100, 3.0, EnumSet.of(Sovereignty.Amarr, Sovereignty.Gallente), -1.0, 0.2,
+                new OreMineralData(Mineral.Tritanium, .141, 180),
+                new OreMineralData(Mineral.Pyerite, .141, 72),
+                new OreMineralData(Mineral.Mexallon, .141, 17),
+                new OreMineralData(Mineral.Isogen, .141, 59),
+                new OreMineralData(Mineral.Nocxium, .282, 118),
+                new OreMineralData(Mineral.Zydrine, .018, 8)));
 
-        ores.add(new OreImpl("Hedbergite", 500, 3.0, EnumSet.of(Sovereignty.Caldari, Sovereignty.Minmatar), -1.0, 0.2,
-                new OreMineralData(Mineral.Isogen, .472, 708),
-                new OreMineralData(Mineral.Nocxium, .236, 354),
-                new OreMineralData(Mineral.Zydrine, .021, 32)));
+        ores.add(new OreImpl("Hedbergite", 100, 3.0, EnumSet.of(Sovereignty.Caldari, Sovereignty.Minmatar), -1.0, 0.2,
+                new OreMineralData(Mineral.Pyerite, .472, 81),
+                new OreMineralData(Mineral.Isogen, .472, 196),
+                new OreMineralData(Mineral.Nocxium, .236, 98),
+                new OreMineralData(Mineral.Zydrine, .021, 9)));
 
     }
 

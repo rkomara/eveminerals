@@ -17,29 +17,30 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-package komara.eo.mineral;
+package komara.eo.remote;
+
+import com.beimin.eveapi.account.characters.EveCharacter;
+import com.beimin.eveapi.core.ApiAuth;
+import com.beimin.eveapi.exception.ApiException;
+import com.beimin.eveapi.shared.locations.ApiLocation;
 
 import java.util.Collection;
 import java.util.Map;
+import java.util.Set;
 
 /**
- * Created by Rastislav Komara on 1/14/14.
+ * Created by Rastislav Komara on 2/4/14.
  */
-public interface ReprocessingSolution extends Comparable<ReprocessingSolution> {
+public interface RemoteAPIService {
+    ApiAuth<?> authorize(int keyID, String vCode);
 
-    long[] getResultMinerals();
+    Set<EveCharacter> getCharacters(ApiAuth<?> auth) throws ApiException;
 
-    Collection<Ore> getOres();
+    Map<Integer, Long> getAvailableMineralQuantities(ApiAuth<?> character) throws ApiException;
 
-    long getTotalVolume();
+    Collection<ApiLocation> getLocationsWithMinerals(ApiAuth<?> character) throws ApiException;
 
-    long getVolume(Ore ore);
+    Map<Long, long[]> getMineralsByLocation(ApiAuth<?> character) throws ApiException;
 
-    Map<Ore, Long> getOreList();
-
-    Map<Ore, Double> getOreUnitsList();
-
-    boolean isValid();
-
-    boolean isPartial();
+    Set<EveCharacter> getAllCharacters(Map.Entry<Integer, String>... keys) throws ApiException;
 }

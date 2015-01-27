@@ -33,15 +33,18 @@ class OreSolution {
 
     long[] minerals = new long[Mineral.values().length];
     Map<Ore, Long> volumes;
+    Map<Ore, Double> units;
 
     OreSolution(long[] minerals) {
         System.arraycopy(minerals, 0, this.minerals, 0, minerals.length);
         volumes = new HashMap<Ore, Long>();
+        units = new HashMap<Ore, Double>();
     }
 
     OreSolution(OreSolution oldOne) {
         System.arraycopy(oldOne.minerals, 0, this.minerals, 0, minerals.length);
         volumes = new HashMap<Ore, Long>(oldOne.volumes);
+        units = new HashMap<Ore, Double>(oldOne.units);
     }
 
     @Override

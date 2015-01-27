@@ -37,14 +37,28 @@
     <modules>
         <module>service</module>
         <module>gui</module>
+        <!--<module>remote</module>-->
         <module>dist</module>
     </modules>
+
+    <repositories>
+        <repository>
+            <id>EveAPI</id>
+            <name>EveAPI Maven Repository</name>
+            <url>svn:https://eveapi.googlecode.com/svn/m2/releases</url>
+        </repository>
+    </repositories>
 
     <dependencies>
         <dependency>
             <groupId>org.codehaus.mojo</groupId>
             <artifactId>properties-maven-plugin</artifactId>
             <version>1.0-alpha-2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hsqldb</groupId>
+            <artifactId>hsqldb</artifactId>
+            <version>2.3.1</version>
         </dependency>
     </dependencies>
 

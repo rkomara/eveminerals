@@ -160,9 +160,11 @@ class ReprocessingPlantPanel extends JPanel {
         NumberFormat format = NumberFormat.getInstance();
         StringBuilder builder = new StringBuilder("Minimal ore volume solution:\n");
         Map<Ore, Long> oreList = solution.getOreList();
+        Map<Ore, Double> oreUnits = solution.getOreUnitsList();
         for (Map.Entry<Ore, Long> entry : oreList.entrySet()) {
             builder.append("\t").append(entry.getKey().getName()).append(": ").append(format.format(entry.getValue()));
-            builder.append(" (").append(Math.ceil(((double) entry.getValue()) / cargoVolume)).append(" shipments)").append("\n");
+            builder.append(" (").append(Math.ceil(((double) entry.getValue()) / cargoVolume)).append(" shipments)");
+            builder.append("\t").append(format.format(oreUnits.get(entry.getKey()))).append(" units").append("\n");
         }
 
         builder.append("\n").append("You will get following excessive minerals:\n");

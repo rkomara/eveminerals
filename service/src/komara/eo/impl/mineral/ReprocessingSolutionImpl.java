@@ -88,6 +88,14 @@ class ReprocessingSolutionImpl implements ReprocessingSolution {
     }
 
     @Override
+    public Map<Ore, Double> getOreUnitsList() {
+        if (solution != null) {
+            return Collections.unmodifiableSortedMap(new TreeMap<Ore, Double>(solution.units));
+        }
+        return Collections.emptyMap();
+    }
+
+    @Override
     public boolean isValid() {
         return solution != null;
     }

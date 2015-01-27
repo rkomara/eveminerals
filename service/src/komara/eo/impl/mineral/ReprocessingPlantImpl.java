@@ -118,7 +118,7 @@ public class ReprocessingPlantImpl implements ReprocessingPlant {
         if (solution != null) {
             System.out.println("Solution:");
             for (Map.Entry<Ore, Long> entry : solution.volumes.entrySet()) {
-                System.out.printf("\t%s - %d%n", entry.getKey().getName(), entry.getValue());
+                System.out.printf("\t%s - %d : (%f units)%n", entry.getKey().getName(), entry.getValue(), solution.units.get(entry.getKey()));
             }
             System.out.println("\tResult: " + Arrays.toString(solution.minerals));
         }
@@ -194,7 +194,8 @@ public class ReprocessingPlantImpl implements ReprocessingPlant {
         double adjustedBatch = netUnits(base.getUnitsPerBatch(), yield, tax);
         long required = solution.minerals[mineral.ordinal()];
         double batches = Math.ceil(required / adjustedBatch);
-        long oreVolume = (long) Math.ceil((ore.getUnitsToRefine() * batches) * ore.getVolume());
+        double units = ore.getUnitsToRefine() * batches;
+        long oreVolume = (long) Math.ceil(units * ore.getVolume());
 
         List<OreMineral> extracted = ore.getBatchResult();
         for (OreMineral oreMineral : extracted) {
@@ -206,8 +207,10 @@ public class ReprocessingPlantImpl implements ReprocessingPlant {
         Map<Ore, Long> volumes = solution.volumes;
         if (volumes.containsKey(ore) ) {
             oreVolume += volumes.get(ore);
+            units += solution.units.get(ore);
         }
         volumes.put(ore, oreVolume);
+        solution.units.put(ore, units);
     }
 
     private double netUnits(int units, double yield, double tax) {

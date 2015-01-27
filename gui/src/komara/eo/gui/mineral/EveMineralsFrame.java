@@ -21,12 +21,15 @@ package komara.eo.gui.mineral;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.InputEvent;
 import java.util.prefs.Preferences;
 
 /**
  * Created by Rastislav Komara on 1/14/14.
  */
 public class EveMineralsFrame extends JFrame {
+    public static final String KEY_COPY_FROM_CLIPBOARD = "COPY_FROM_CLIPBOARD";
     private JTabbedPane tabs;
     private final JPanel frameBase;
     private final Preferences preferences;
@@ -52,6 +55,17 @@ public class EveMineralsFrame extends JFrame {
         tabs.add("Ore volumes", reprocessingPlantPanel);
 
         pack();
+
+        // actions
+        JComponent component = (JComponent) getContentPane();
+        component.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(KeyStroke.getKeyStroke('V', InputEvent.CTRL_DOWN_MASK), KEY_COPY_FROM_CLIPBOARD);
+        component.getActionMap().put(KEY_COPY_FROM_CLIPBOARD, new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("CTRL + V works!");
+            }
+        });
+
     }
 
     public void savePreferences(Preferences preferences) {

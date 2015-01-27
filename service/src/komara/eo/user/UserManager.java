@@ -17,29 +17,18 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-package komara.eo.mineral;
+package komara.eo.user;
 
-import java.util.Collection;
+import java.util.List;
 import java.util.Map;
+import java.util.prefs.Preferences;
 
 /**
- * Created by Rastislav Komara on 1/14/14.
+ * Created by Rastislav Komara on 5/26/2014.
  */
-public interface ReprocessingSolution extends Comparable<ReprocessingSolution> {
+public interface UserManager {
 
-    long[] getResultMinerals();
+    List<Map.Entry<Integer, String>> getActiveAPIKeys(Preferences prefs) throws Exception;
 
-    Collection<Ore> getOres();
 
-    long getTotalVolume();
-
-    long getVolume(Ore ore);
-
-    Map<Ore, Long> getOreList();
-
-    Map<Ore, Double> getOreUnitsList();
-
-    boolean isValid();
-
-    boolean isPartial();
 }

@@ -17,29 +17,15 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-package komara.eo.mineral;
+package komara.eo.gui.mineral;
 
-import java.util.Collection;
-import java.util.Map;
+import komara.eo.gui.input.MineralInput;
+
+import java.util.EventListener;
 
 /**
- * Created by Rastislav Komara on 1/14/14.
+ * Created by Rastislav Komara on 2/3/14.
  */
-public interface ReprocessingSolution extends Comparable<ReprocessingSolution> {
-
-    long[] getResultMinerals();
-
-    Collection<Ore> getOres();
-
-    long getTotalVolume();
-
-    long getVolume(Ore ore);
-
-    Map<Ore, Long> getOreList();
-
-    Map<Ore, Double> getOreUnitsList();
-
-    boolean isValid();
-
-    boolean isPartial();
+public interface MineralClipboardInputListener extends EventListener {
+    void mineralInput(MineralInput input);
 }

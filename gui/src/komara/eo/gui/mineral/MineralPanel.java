@@ -19,6 +19,7 @@
 
 package komara.eo.gui.mineral;
 
+import komara.eo.gui.input.MineralInput;
 import komara.eo.mineral.Mineral;
 
 import javax.swing.*;
@@ -230,6 +231,21 @@ class MineralPanel extends JPanel {
         mineralTextFields[i] = createTextField();
         label.setLabelFor(mineralTextFields[i]);
         this.add(mineralTextFields[i], c);
+
+
+        ClipboardTools.getDefault().addListener(MineralClipboardInputListener.class, new MineralClipboardInputListener() {
+            @Override
+            public void mineralInput(MineralInput input) {
+                if (input != null) {
+                    for(int i = 0; i < mineralTextFields.length; i++) {
+                        JFormattedTextField textField = (JFormattedTextField) mineralTextFields[i];
+                        long quantity = input.getQuantity(Mineral.values()[i]);
+                        textField.setValue(quantity);
+                    }
+                }
+            }
+        });
+
     }
 
     private JTextField createTextField() {
@@ -251,6 +267,7 @@ class MineralPanel extends JPanel {
                 });
             }
         });
+        ClipboardTools.installClipboardSupport(textField);
         return textField;
     }
 

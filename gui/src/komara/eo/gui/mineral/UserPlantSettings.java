@@ -118,6 +118,7 @@ class UserPlantSettings extends JPanel {
             }
         });
         label.setLabelFor(cargoVolume);
+        ClipboardTools.installClipboardSupport(cargoVolume);
 
         c.gridx = 1;
         c.weightx = 1.0;
@@ -154,8 +155,9 @@ class UserPlantSettings extends JPanel {
 
             }
         };
-        ((JSpinner.DefaultEditor) spinner.getEditor()).getTextField()
-                .addFocusListener(focusAdapter);
+        JFormattedTextField textField = ((JSpinner.DefaultEditor) spinner.getEditor()).getTextField();
+        textField.addFocusListener(focusAdapter);
+        ClipboardTools.installClipboardSupport(textField);
         return spinner;
     }
 

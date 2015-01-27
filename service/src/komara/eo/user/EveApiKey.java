@@ -17,29 +17,26 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-package komara.eo.mineral;
-
-import java.util.Collection;
-import java.util.Map;
+package komara.eo.user;
 
 /**
- * Created by Rastislav Komara on 1/14/14.
+ * Created by Rastislav Komara on 5/26/2014.
  */
-public interface ReprocessingSolution extends Comparable<ReprocessingSolution> {
+public class EveApiKey {
+    private int keyId;
+    private String verificationCode;
+    private boolean active;
 
-    long[] getResultMinerals();
+    public EveApiKey(int keyId, String verificationCode) {
+        this.keyId = keyId;
+        this.verificationCode = verificationCode;
+    }
 
-    Collection<Ore> getOres();
+    public boolean isActive() {
+        return active;
+    }
 
-    long getTotalVolume();
-
-    long getVolume(Ore ore);
-
-    Map<Ore, Long> getOreList();
-
-    Map<Ore, Double> getOreUnitsList();
-
-    boolean isValid();
-
-    boolean isPartial();
+    public void setActive(boolean active) {
+        this.active = active;
+    }
 }

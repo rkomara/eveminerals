@@ -17,29 +17,19 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-package komara.eo.mineral;
+package komara.eo.gui.input;
 
-import java.util.Collection;
-import java.util.Map;
+import java.awt.datatransfer.Transferable;
 
 /**
- * Created by Rastislav Komara on 1/14/14.
+ * Created by Rastislav Komara on 2/2/14.
  */
-public interface ReprocessingSolution extends Comparable<ReprocessingSolution> {
+public interface InputDataParser {
 
-    long[] getResultMinerals();
+    boolean parse(Transferable input);
 
-    Collection<Ore> getOres();
+    boolean canAccept(Transferable input);
 
-    long getTotalVolume();
+    MineralInput getMineralInput();
 
-    long getVolume(Ore ore);
-
-    Map<Ore, Long> getOreList();
-
-    Map<Ore, Double> getOreUnitsList();
-
-    boolean isValid();
-
-    boolean isPartial();
 }
